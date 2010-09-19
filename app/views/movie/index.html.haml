@@ -1,0 +1,8 @@
+%h1 All Movies
+- @movies.each do |m|
+  %span= m.name
+
+- form_for :movie, :url => { :action => "new" } do |m|
+  = m.error_messages
+  = m.text_field :name
+  = submit_tag "Add New Movie"
