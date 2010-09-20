@@ -1,0 +1,12 @@
+%html
+  %head
+    = stylesheet_link_tag("main")
+    %body
+      %div#nav_bar
+        %ul
+          %li= link_to "Home", :controller => "welcome", :action => "index"
+          %li= link_to "Movie", :controller => "movie", :action => "index"
+          %li= link_to "Actor", :controller => "actor", :action => "index"
+      %div.main_content
+        %center
+          = yield
