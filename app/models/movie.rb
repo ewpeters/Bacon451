@@ -26,4 +26,21 @@ class Movie < ActiveRecord::Base
     end
     self.save!
   end
+  # pings the movie db api for the movie name in params and stores the info
+  def self.search_movie_db(movie_name, movie_year)
+    doc     = Nokogiri::XML(open("http://api.themoviedb.org/2.1/Movie.search/en/xml/89064d9f8b5af92d29e719ba32515770/#{movie_name.gsub(/ /, '+')}+#{movie_year}"))
+    results = doc.xpath("//opensearch:totalResults").text.to_i
+    movie   = doc.xpath("//movie")
+    
+    if results == 0 
+      return nil
+    else
+      imdb_id         = movie.first.search("id").text
+      movie_released  = Date.parse(movie.first.search("released").text)
+      movie_year      = movie_released.year
+      new_movie = Movie.find_or_create_by_name_and_year(:name => movie_name, :year => movie_year)
+      new_movie.addActors(imdb_id)
+      return new_movie
+    end
+  end
 end
