@@ -1,7 +1,7 @@
 == Welcome to The 6 Degrees of Kevin Bacon
 
 Degrees of seperation rails app for movies. It uses themoviedb's api to get the information (http://api.themoviedb.org/2.1),
-redis and sql to store it, and dijktra's algoritim to find the degrees. Have fune!
+redis and sql to store it, and dijktra's algoritim to find the degrees. Have fun!
 
 
 == Getting Started
