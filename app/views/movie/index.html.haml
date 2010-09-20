@@ -1,8 +1,15 @@
-%h1 All Movies
-- @movies.each do |m|
-  %span= m.name
-
-- form_for :movie, :url => { :action => "new" } do |m|
+%ul#movie_list
+  %li.title All Movies
+  - @movies.each do |m|
+    %li.movie
+      %span= m.name
+      %span= m.year
+%div= flash[:notice]
+%br
+- form_for :movie, :url => { :action => "create" } do |m|
   = m.error_messages
+  Name : 
   = m.text_field :name
+  Year (optional): 
+  = m.text_field :year
   = submit_tag "Add New Movie"
