@@ -1,0 +1,11 @@
+%div.title Pick two actors to find their degree of seperation
+
+- form_for :actor, :url => path_path do |a|
+  - all_actors =  Actor.find(:all, :order => "name").collect {|a| [a.name, a.id]}
+  = select("actor_one", "id", all_actors)
+  to
+  = select("actor_two", "id", all_actors)
+  = submit_tag "Find Degrees"
+
+- if flash[:distance]
+  %span= "#{flash[:actor_one]} to #{flash[:actor_two]} in #{pluralize(flash[:distance], 'degree')}"

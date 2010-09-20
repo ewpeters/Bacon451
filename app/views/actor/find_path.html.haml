@@ -1,0 +1,7 @@
+- form_for :actor, :url => path_path do |a|
+  = select("actor_one", "id", Actor.find(:all).collect {|a| [a.name, a.id]})
+  to
+  = select("actor_two", "id", Actor.find(:all).collect {|a| [a.name, a.id]})
+  = submit_tag "Find Path"
+
+%span= "#{flash[:actor_one]} to #{flash[:actor_two]} in #{flash[:distance]} hops"
